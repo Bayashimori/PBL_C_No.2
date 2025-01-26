@@ -1,0 +1,58 @@
+@charset "UTF-8"; 
+     
+     
+    .tab-btn {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        font-family: "Stick", sans-serif;
+    }
+
+    .btn {
+        flex-basis: 50%;
+        text-align: center;
+    }
+    .btn a {
+        display: block;
+        position: relative;
+        font-size: 16px;
+        padding: 8px;
+        text-decoration: none;
+        line-height: 1.2;
+        color: #181716;
+        background-color: #fff;
+        cursor: pointer;
+    }
+    .btn a.is-active {
+        background-color: #ececec;
+    }
+
+
+    .tab-contents-item {
+        display: none;
+        width: 100%;
+        height: 800px;
+        justify-content: center;
+    }
+    .tab-contents-item.is-active {
+        display: flex;
+        background-color: #ececec;
+
+    }
+    .tab-contents-item>p {
+        margin: auto;
+        height: 40px;
+        opacity: 0;
+    }
+    .tab-contents-item.is-active>p {
+      animation:  fadeinAnime 2s forwards;
+    }
+
+    @keyframes fadeinAnime{
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+    }

@@ -1,0 +1,17 @@
+#capture {
+    position: absolute;
+    top: 65px; /*高さかえた*/
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#capture:hover {
+    background-color: #45a049;
+}
+

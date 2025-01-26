@@ -1,0 +1,136 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
+header{
+ background: white;
+ position: fixed;
+ width: 50%;
+ height: 50px;
+}
+
+h1 {
+    font-family: "Zen Antique Soft", serif;
+    font-size: 50px; 
+    color: rgb(57, 145, 189); 
+    font-weight: 400;
+    font-style: normal;
+    margin-bottom: 50px;
+}
+
+
+.form-group {
+    margin-bottom: 10px; 
+  /*  font-family: "Zen Antique Soft", serif;*/
+}
+
+.iro{
+    font-family: "Hachi Maru Pop", serif;
+}
+
+#myChart1, #myChart2 {
+    width: 450px !important;
+    height: 200px !important;
+    margin: 20px auto;
+}
+
+
+
+/*
+.M{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+*/
+
+
+/*ハンバーガーメニューの中身*/
+
+#navigation{
+position: absolute;
+height: 100vh;
+width: 40%;
+left: -40%;
+top: 0;
+background:rgba(0,212,255,0.3);
+z-index: 9998;
+transition: 0.5s;   /*メニューを表示させる速度*/
+}
+
+
+
+#navigation ul{
+padding-top:  90px;
+}
+
+#navigation ul li{
+    list-style: none;
+    font-size:  24px;
+    padding-left: 30px;
+}
+
+#navigation ul li a{
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+/*ハンバーガーメニューの中身終わり*/
+
+/*ハンバーガーメニューの三本線のところ*/
+
+#drawer-navigation{
+ display: block;
+ position: absolute;
+ top: 30px;
+ left: 30px;
+ width: 30px;
+ height: 30px;
+ z-index: 9999;
+}
+
+#drawer-navigation .drawer-line{
+ display: block;
+ position: absolute;
+ left: 0;
+ width: 30px;
+ height: 5px;
+ background: black;
+ border-radius: 5px;
+ transition: 0.5s; /*メニューを閉じる速度*/
+}
+
+#drawer-navigation #line1{
+    top: 0;
+}
+
+#drawer-navigation #line2{
+    top: 13px;
+}
+
+#drawer-navigation #line3{
+   bottom: 0;
+}
+
+/*ハンバーガーメニューの三本線　終了*/
+
+.in{
+    transform: translateX(100%);
+}
+
+#drawer-navigation .line_1{
+    transform: translateY(12.5px) rotate(-45deg);
+}
+
+#drawer-navigation .line_2{
+   opacity: 0;
+}
+
+#drawer-navigation .line_3{
+    transform: translateY(-12.5px) rotate(45deg);
+}

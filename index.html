@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成績表とグラフ</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto;
+          
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #myChart {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Stick&display=swap" rel="stylesheet">
+
+
+    <link href="style.css" rel="stylesheet"/>
+    <link href="main.css" rel="stylesheet"/>
+    <link href="index.css" rel="stylesheet"/>
+    <link href="tab.css" rel="stylesheet"/>
+    <link href="capture.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="tab.js"></script>
+    <script src="save.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+</head>
+<body id="area">
+    <nav id="navigation">
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="https://www.ktc.ac.jp/cms/syllabus/">近大高専シラバス</a></li>
+        </ul>
+    </nav>
+
+    <nav id="drawer-navigation">
+        <span id="line1" class="drawer-line"></span>
+       <span id="line2" class="drawer-line"></span>
+       <span id="line3" class="drawer-line"></span>
+   </nav>
+   
+   <script type="text/javascript" src="script.js"></script>
+
+   <!-- スクショ -->
+   
+   <button type="button" id="capture">やる気スイッチ</button>
+
+   <!-- 画像としてキャプチャする部分（ページ全体や任意のエレメント） -->
+   <div id="content">
+   
+    <!-- 終わり -->
+
+    <h1>成績表とグラフ</h1>
+
+    <div class="tab-btn" id="tab-btn">
+        <div class="btn"><a data-tab="#menu1">前期成績</a></div>
+        <div class="btn"><a data-tab="#menu2">後期成績</a></div>
+    </div>
+
+    <div id="tab-contents">
+        <div id="menu1" class="tab-contents-item">
+            <form id="gradeForm1">
+                <div class="form-group">
+                    <label for="course1">学科:</label>
+                    <select id="course1" onchange="updateSubjects(1)">
+                        <option value="">選択してください</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3-M">3-M</option>
+                        <option value="3-E">3-E</option>
+                        <option value="3-I">3-I</option>
+                        <option value="3-CA">3-CA</option>
+                        <option value="4-M">4-M</option>
+                        <option value="4-E">4-E</option>
+                        <option value="4-I">4-I</option>
+                        <option value="4-CA">4-CA</option>
+                        <option value="5-M">5-M</option>
+                        <option value="5-E">5-E</option>
+                        <option value="5-I">5-I</option>
+                        <option value="5-CA">5-CA</option>
+                        <option value="専1-M">専1-M</option>
+                        <option value="専1-E">専1-E</option>
+                        <option value="専1-I">専1-I</option>
+                        <option value="専1-CA">専1-CA</option>
+                        <option value="専2-M">専2-M</option>
+                        <option value="専2-E">専2-E</option>
+                        <option value="専2-I">専2-I</option>
+                        <option value="専2-CA">専2-CA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject1">科目:</label>
+                    <select id="subject1">
+                        <option value="">まず学科を選択してください</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="score1">前期成績:</label>
+                    <input type="number" id="score1" required min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="btn">追加</button>
+                </div>
+                <table id="gradeTable1">
+                    <tr class="iro">
+                        <th>科目</th>
+                        <th>前期成績</th>
+                    </tr>
+                </table>
+                <canvas id="myChart1"></canvas>
+
+                <div class="form-group">
+                    <button type="botton" id="btn" onclick="location.reload()">リセット</button>
+                </div>
+                
+
+                <!-- <form action="input_reset.html"> -->
+                    <!-- <input type="reset" value="リセット"> -->
+                <!-- </form> -->
+            </form>
+            
+        </div>
+
+        <div id="menu2" class="tab-contents-item">
+            <form id="gradeForm2">
+                <div class="form-group">
+                    <label for="course2">学科:</label>
+                    <select id="course2" onchange="updateSubjects(2)">
+                        <option value="">選択してください</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3-M">3-M</option>
+                        <option value="3-E">3-E</option>
+                        <option value="3-I">3-I</option>
+                        <option value="3-CA">3-CA</option>
+                        <option value="4-M">4-M</option>
+                        <option value="4-E">4-E</option>
+                        <option value="4-I">4-I</option>
+                        <option value="4-CA">4-CA</option>
+                        <option value="5-M">5-M</option>
+                        <option value="5-E">5-E</option>
+                        <option value="5-I">5-I</option>
+                        <option value="5-CA">5-CA</option>
+                        <option value="専1-M">専1-M</option>
+                        <option value="専1-E">専1-E</option>
+                        <option value="専1-I">専1-I</option>
+                        <option value="専1-CA">専1-CA</option>
+                        <option value="専2-M">専2-M</option>
+                        <option value="専2-E">専2-E</option>
+                        <option value="専2-I">専2-I</option>
+                        <option value="専2-CA">専2-CA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject2">科目:</label>
+                    <select id="subject2">
+                        <option value="">まず学科を選択してください</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="score2">後期成績:</label>
+                    <input type="number" id="score2" required min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <button type="submit">追加</button>
+                </div>
+                <table id="gradeTable2">
+                    <tr class="iro">
+                        <th>科目</th>
+                        <th>後期成績</th>
+                    </tr>
+                </table>
+                <canvas id="myChart2"></canvas>
+
+                <div class="form-group">
+                    <button type="botton"  onclick="location.reload()">リセット</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const subjects1 = [];
+        const scores1 = [];
+        const colors1 = [];
+
+        const subjects2 = [];
+        const scores2 = [];
+        const colors2 = [];
+        
+        function getRandomColor(subject) {
+            const r = Math.floor((Math.random() * 60) + 180);
+            const g = Math.floor((Math.random() * 60) + 180);
+            const b = Math.floor((Math.random() * 60) + 180);
+            return `rgba(${r}, ${g}, ${b}, 0.6)`;
+            // 教科数が多いので色をランダムに戻した
+        }
+
+        let chart1 = null;
+        let chart2 = null;
+
+        function updateChart(chart, canvasId, subjects, scores, colors) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: subjects,
+                    datasets: [{
+                        label: 'グラフ更新',
+                        data: scores,
+                        backgroundColor: colors,
+                        borderColor: colors.map(color => color.replace('0.6', '1')),
+                        borderWidth: 0//枠線消した
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateSubjects(formNumber) {
+            const course = document.getElementById(`course${formNumber}`).value;
+            const subjectSelect = document.getElementById(`subject${formNumber}`);
+            const subjects = {
+                "1": ["基礎数学", "英語", "国語", "化学", "日本史", "地理","保健体育","芸術", "防災リテラシー", "保健体育","情報処理", "英語(選択)","基礎数学(選択)","基礎物理(選択)"],
+                "2": ["微積分学", "線形代数","英語", "国語", "物理", "化学", "政治経済", "世界史",  "保健体育","工学概論","図学","工学実験","英語(選択)","線形代数(選択)"],
+                "3-M": ["微積分学", "英語", "国語", "物理", "倫理", "金属材料","機構学","コンピュータ概論", "工業力学", "保健体育", "英語演習","微積分学演習"],
+                "3-E": ["微積分学", "英語", "国語", "物理", "倫理", "コンピュータ概論", "機械工学概論", "電気電子材料", "電気磁気学", "電気回路", "保健体育", "英語演習","微積分学演習"],
+                "3-I": ["微積分学", "英語", "国語", "物理", "倫理", "電気電子回路", "論理回路", "3D-CAD・CG", "プログラミング実習","情報セキュリティと法制度","コンピュータ基礎", "保健体育", "英語演習","微積分学演習"],
+                "3-CA": ["微積分学", "英語", "国語", "物理", "倫理", "構造力学", "建築材料学", "測量学", "水理学","建築史","地盤工学", "保健体育", "英語演習","微積分学演習"],
+                "4-M":["国語","英語","経済学","保健体育","応用数学","工業数学","応用物理","メカトロニクス","材料力学","力学演習","工業熱力学","流体力学","加工プロセス学","電気工学概論","機械システム設計製図","工学実験","工作実習","プラスチック成形加工","解析学(選択)","中国語(選択)"],
+                "4-E":["国語","英語","経済学","保健体育","応用数学","応用物理","データ処理","計測工学","電気磁気学","電気回路","電気機器","通信工学","電子回路","工学実験","解析学(選択)","中国語(選択)","電子工学(選択)","工業数学(選択)","回路演習(選択)"],
+                "4-I":["国語","英語","経済学","保健体育","ソフトウェア工学","数理論理学","オペレーティングシステム","制御工学","データベース","応用数学","数値計算法","通信理論・符号理論","データ構造とアルゴリズム","応用物理","情報実習","メカトロニクス","情報化と経営","工学実験","解析学(選択)","中国語(選択)"],
+                "4-CA":["国語","英語","経済学","保健体育","構造力学","応用数学","応用物理","コンクリート構造学","測量学","都市工学実験","建設設計製図","衛生工学","水理学","地盤工学","土木計画学","建築設計製図コンピューター・デザイン演習","建築設計・デザイン","建築環境","建築構造","工業数学","建築法規","建築史","解析学(選択)","中国語(選択)"],
+                "5-M":["保健体育","解析学","法学","制御工学","計測工学","材料力学","工業熱力学","流体力学","機械力学","加工プロセス","物質移動工学","機械システム設計製図","工学実験","英語特講(選択)","TOEICプラス(選択)","外国文献購読(選択)","中国語(選択)","技術と理論(選択)"],
+                "5-E":["保健体育","解析学","法学","制御工学","電気電子設計製図","送配電工学","パワーレクトロニクス","高電圧工学","発変電工学","電気法規・電気施設管理","通信工学","電子回路","工学実験","保健体育","解析学","法学","英語特講(選択)","TOEICプラス(選択)","外国文献購読(選択)","中国語(選択)","技術と理論(選択)"],
+                "5-I":["保健体育","解析学","法学","ネットワークセキュリティ","情報メディア論","ロボット工学","データ構造とアルゴリズム","サイバーセキュリティ実習","ソフトウェアセキュリティ","ハードウェアセキュリティ","画像・音声処理","人工知能","情報実習","保健体育","解析学","法学","英語特講(選択)","TOEICプラス(選択)","外国文献購読(選択)","中国語(選択)","技術と理論(選択)"],
+                "5-CA":["保健体育","解析学","法学","構造力学","景観環境デザイン","環境工学","測量実習","耐震工学","交通工学","建設設計製図","建設工学実験","施工管理学","河川環境工学","橋梁工学","建築構法","建築設備","建築施工","住宅計画","コンピュータデザイン演習","デザイン構成論","スチールトラクチャー","建築構造設計","コンクリート構造学","保健体育","解析学","法学","英語特講(選択)","TOEICプラス(選択)","外国文献購読(選択)","中国語(選択)","技術と理論(選択)"],
+                "専1-M":["日本語表現法","総合英語","応用数学特論","解析力学","離散数学","化学特論","知的情報処理","計算力学","生産環境工学","機械工学実験","生産加工学","応用流体力学","伝熱概論","振動工学","エネルギー変換工学","流体工学特論"],
+                "専1-E":["日本語表現法","総合英語","応用数学特論","解析力学","離散数学","化学特論","知的情報処理","計算力学","生産環境工学","電気電子工学実験","エネルギー変換論","電子回路特論","半導体デバイス工学","電磁気学特論","メディア情報処理","技術英語構読","生産システム工学特別研究"],
+                "専1-I":["日本語表現法","総合英語","応用数学特論","解析力学","離散数学","化学特論","知的情報処理","計算力学","生産環境工学","情報工学実験","情報工学特論","計算機システム特論","電子回路特論","信号処理工学特論","メディア情報処理","通信工学特論","生産システム工学特別研究"],
+                "専1-CA":["日本語表現法","総合英語","応用数学特論","解析力学","離散数学","化学特論","知的情報処理","計算力学","生産環境工学","土木工学実験","構造力学特論","土質工学特論","都市地域計画学特論","水理学特論","交通計画学特論","生産システム工学特別研究"],
+                "専2-M":["技術者倫理","国際社会の中の日本","統計力学","物理学特論","知能システム","信頼性工学","材料物理","機械工学実験","機械工学演習","材料力学特論","工業材料","システム制御工学","生産システム工学特別研究"],
+                "専2-E":["技術者倫理","国際社会の中の日本","統計力学","物理学特論","知能システム","信頼性工学","材料物理","電気電子工学実験","電気電子工学演習","絶縁設計工学","電子物性特論","半導体シミュレーション","並列計算法","生産システム工学特別研究"],
+                "専2-I":["技術者倫理","国際社会の中の日本","統計力学","物理学特論","知能システム","信頼性工学","材料物理","情報工学実験","情報工学演習","プログラミング言語特論","人工知能特論","計画数理特論","並列計算法","システム制御工学","生産システム工学特別研究"],
+                "専2-CA":["技術者倫理","国際社会の中の日本","統計力学","物理学特論","知能システム","信頼性工学","材料物理","土木工学実験","土木工学演習","都市環境生態工学特論","都市交通計画学特論","水工学特論","建設材料学特論","環境地盤工学特論","農村地域計画学特論","生産システム工学特別研究"]
+            };
+
+            subjectSelect.innerHTML = "<option value=''>科目を選択してください</option>";
+            if (course && subjects[course]) {
+                subjects[course].forEach(sub => {
+                    const option = document.createElement("option");
+                    option.value = sub;
+                    option.textContent = sub;
+                    subjectSelect.appendChild(option);
+                });
+            }
+        }
+
+        function addGrade(formNumber, subjects, scores, colors, tableId, canvasId) {
+            const form = document.getElementById(`gradeForm${formNumber}`);
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const subject = document.getElementById(`subject${formNumber}`).value;
+                const score = parseFloat(document.getElementById(`score${formNumber}`).value);
+
+                if (!subject || subjects.includes(subject)) return;
+
+                const table = document.getElementById(tableId);
+                const newRow = table.insertRow();
+                const subjectCell = newRow.insertCell(0);
+                const scoreCell = newRow.insertCell(1);
+
+                subjectCell.textContent = subject;
+                scoreCell.textContent = score;
+
+                subjects.push(subject);
+                scores.push(score);
+                colors.push(getRandomColor(subject));
+
+                updateChart(formNumber === 1 ? chart1 : chart2, canvasId, subjects, scores, colors);
+
+                form.reset();
+            });
+        }
+
+        addGrade(1, subjects1, scores1, colors1, 'gradeTable1', 'myChart1');
+        addGrade(2, subjects2, scores2, colors2, 'gradeTable2', 'myChart2');
+    </script>
+</body>
+</html>
