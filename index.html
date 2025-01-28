@@ -64,7 +64,88 @@
    </nav>
    
    <script type="text/javascript" src="script.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const button = document.getElementById("capture");
+        const message = document.createElement("div");
+        message.id = "motivation-message";
+        message.textContent = "やる気スイッチ";
+        document.body.appendChild(message);
 
+
+        const messages = [
+            "やる気満々！",
+            "休憩しよう！",
+            "頑張れるよ！",
+            "まだまだいける！",
+            "ちょっとリラックスしてみよう！",
+            "坂東先生がみてるよ！",
+            "大丈夫！",
+            "次は100点 ! "
+        ];
+
+
+                // 画像ファイルのリスト
+            const images = [
+            "itoj.jpg",  // 画像1
+            "band.jpg",  // 画像2
+            "kuwa.png",  // 画像3
+            "itoG.gif",
+            "ban.gif",
+            "ban2.gif"
+        ]
+
+        function getRandomColor() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r}, ${g}, ${b},0.9)`;
+        }
+
+
+        let clickCount = 0;
+
+
+        button.addEventListener("click", () => {
+            clickCount++;
+
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            message.textContent = randomMessage; // メッセージを更新
+
+             // ランダムな色
+            const randomColor = getRandomColor();
+            message.style.backgroundColor = randomColor; // 背景色を更新
+
+            // クリック回数が3回以上ならランダムに画像を表示
+            if (clickCount >= 5) {
+                const randomImage = images[Math.floor(Math.random() * images.length)];
+                const img = document.createElement("img");
+                img.src = randomImage; // 画像のURLを設定
+                img.style.maxWidth = "200px"; // イラストのサイズ調整
+                img.style.display = "block";
+                img.style.marginTop = "20px"; // メッセージとイラストの間隔
+
+                // イラストがすでに表示されていれば削除
+                if (document.querySelector("img")) {
+                    document.querySelector("img").remove();
+                }
+
+                message.appendChild(img);
+                clickCount = 0; // カウントリセット（必要な場合）
+            }
+
+
+
+            // メッセージを表示
+            message.classList.add("show");
+
+            // アニメーション後に非表示にする
+            setTimeout(() => {
+                message.classList.remove("show");
+            }, 5000); // 2秒後に消える
+        });
+    });
+   </script>
    <!-- スクショ -->
    
    <button type="button" id="capture">やる気スイッチ</button>
