@@ -83,7 +83,8 @@
             "伊藤先生がみてるよ！",
             "ほんとに勉強してる？",
             "大丈夫！",
-            "次は100点 ! "
+            "次は100点 ! ",
+            "すごい！"
             
         ];
 
@@ -107,7 +108,7 @@
             const r = Math.floor(Math.random() * 256);
             const g = Math.floor(Math.random() * 256);
             const b = Math.floor(Math.random() * 256);
-            return `rgb(${r}, ${g}, ${b},0.9)`;
+            return `rgb(${r}, ${g}, ${b},0.8)`;
         }
 
 
@@ -124,7 +125,7 @@
             const randomColor = getRandomColor();
             message.style.backgroundColor = randomColor; // 背景色を更新
 
-            // クリック回数が3回以上ならランダムに画像を表示
+            // クリック回数が5回以上ならランダムに画像を表示
             if (clickCount >= 5) {
                 const randomImage = images[Math.floor(Math.random() * images.length)];
                 const img = document.createElement("img");
@@ -150,7 +151,7 @@
             // アニメーション後に非表示にする
             setTimeout(() => {
                 message.classList.remove("show");
-            }, 5000); // 2秒後に消える
+            }, 5000); // 5秒後に消える
         });
     });
    </script>
