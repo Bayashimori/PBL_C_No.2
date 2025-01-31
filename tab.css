@@ -31,7 +31,7 @@
     .tab-contents-item {
         display: none;
         width: 100%;
-        height: 800px;
+        height: 100%;
         justify-content: center;
     }
     .tab-contents-item.is-active {
